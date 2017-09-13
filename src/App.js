@@ -3,6 +3,9 @@ import ArticleList from './ArticleList';
 import logo from './logo.svg';
 import './App.css';
 
+const LIST_MODE = 'list';
+const TABLE_MODE = 'table';
+
 class App extends Component {
   constructor() {
     super();
@@ -22,6 +25,7 @@ class App extends Component {
         text: 'Because the element’s CSS properties haven’t changed, there is no way to use CSS transitions to animate this change.',
       }],
       asc: false,
+      mode: LIST_MODE,
     };
   }
 
@@ -42,11 +46,14 @@ class App extends Component {
     })
   }
 
-  handleRandom() {
-    
+  handleModeChange() {
+    this.setState(prevState => ({
+      mode: prevState.mode === LIST_MODE ? TABLE_MODE : LIST_MODE,
+    }));
   }
 
   render() {
+    const { mode, articles } = this.state;
     return (
       <div className="App">
         <div className="App-header">
@@ -55,8 +62,8 @@ class App extends Component {
         </div>
         <div className="App-intro">
           <button onClick={this.handleSort.bind(this)}>Sort</button>
-          <button onClick={this.handleRandom.bind(this)}>Random</button>
-          <ArticleList articles={this.state.articles} />
+          <button onClick={this.handleModeChange.bind(this)}>{`${mode === LIST_MODE ? TABLE_MODE : LIST_MODE}`}</button>
+          <ArticleList articles={articles} mode={mode} />
         </div>
       </div>
     );

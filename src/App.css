@@ -23,13 +23,24 @@
   to { transform: rotate(360deg); }
 }
 
-.article-list {
+.articles {
   width: 600px;
 }
 
+.articles.list .flip-move {
+  display: flex;
+  flex-direction: column;
+}
+
+.articles.table .flip-move {
+  display: flex;
+  flex-direction: row;
+}
+
 .article {
+  flex: 1;
   border: 1px solid black;
   padding: 5px 10px;
   margin: 5px;
-  height: 90px;
+  min-height: 90px;
 }
